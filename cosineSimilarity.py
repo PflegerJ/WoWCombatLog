@@ -2,6 +2,7 @@
 data = [5, 0, 3, 0, 2, 0, 0, 2, 0, 0]
 data2 = [3, 0, 2, 0, 1, 1, 0, 1, 0, 1]
 data3 = [1, 5, 3, 5]
+
 def cosineSim(vector1, vector2):
 
     length_v1 = 0
@@ -15,7 +16,6 @@ def cosineSim(vector1, vector2):
     length_v1 = length_v1 ** 0.5
     length_v2 = length_v2 ** 0.5
  
-
     return dot_product / ( length_v1 * length_v2 )
 
 
