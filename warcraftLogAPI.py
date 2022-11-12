@@ -32,12 +32,13 @@ def apiCall(query, vars, auth_token):
 
 def getSourceID(query, vars, auth_token, name):
     logz = apiCall(query, vars, auth_token)
-    characters = logz['data']['reportData']['report']['playerDetails']['data']['playerDetails']['dps']
-    for toon in characters:
-        if (toon['name'] == name):
-            return toon['id']
+    if logz['data']['reportData']['report'] != None: 
+        characters = logz['data']['reportData']['report']['playerDetails']['data']['playerDetails']['dps']
+        for toon in characters:
+            if (toon['name'] == name):
+                return toon['id'], True
     
-    return "NA"
+    return "NA", False
 
 def getParseRank(query, vars, auth_token, report_code):
     log = apiCall(query, vars, auth_token)
@@ -47,4 +48,3 @@ def getParseRank(query, vars, auth_token, report_code):
             return report['historicalPercent']
     
     return -1
-

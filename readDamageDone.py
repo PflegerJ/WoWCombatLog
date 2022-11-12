@@ -157,54 +157,46 @@ def writeToFile(fileName, data):
     return
 
 
-def readFile(fileName):
+def damageSummary(log, totalTime):
     data = []
-    file = open(fileName, 'r')
-
-    fileLine = file.readline()
-    while fileLine:
-        
-        jsonLine = json.loads(fileLine)
-        spells = jsonLine['entries']
-        totalTime = jsonLine['totalTime']
-        line_data = [totalTime]
-        vt = []
 
 
-        for spell in spells:
-            spell_guid = spell['guid']
-            spell_name = spell['name']
+    spells = log['data']['reportData']['report']['table']['data']['entries']
+    data = [totalTime]
+    vt = []
 
-            if spell['guid'] == 48160:          # VT
-                vt = DoT(spell, totalTime)
-            elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
-                dp = DoT(spell, totalTime)
-            elif spell['guid'] == 48125:        # SWP
-                swp = DoT(spell, totalTime, swp = True)
+
+    for spell in spells:
+        spell_guid = spell['guid']
+        spell_name = spell['name']
+
+        if spell['guid'] == 48160 or spell['guid'] == 48159:          # VT
+            vt = DoT(spell, totalTime)
+        #elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
+            #dp = DoT(spell, totalTime)
+        #elif spell['guid'] == 48125:        # SWP
+            #swp = DoT(spell, totalTime, swp = True)
 
 
 
-        total_damage = vt[0] + dp[0] + swp[0]
-        line_data.append(total_damage)
+    total_damage = vt[0]# + dp[0] + swp[0]
+    data.append(total_damage)
 
-        line_data.extend(vt)
-        line_data.extend(dp)
-        line_data.extend(swp)
-        """
-        line_data.extend(swp)
-        
-        line_data.extend(swd)
-        line_data.extend(mb)
-        line_data.extend(sf)
-        line_data.extend(mf)
-        """ 
-
-        fileLine = file.readline()
+    data.extend(vt)
+    #data.extend(dp)
+    #data.extend(swp)
+    """
+    line_data.extend(swp)
     
-    file.close()
-    return line_data
+    line_data.extend(swd)
+    line_data.extend(mb)
+    line_data.extend(sf)
+    line_data.extend(mf)
+    """ 
 
+    return data
 
+"""
 data1 = readFile('testData1.txt')
 data2 = readFile('testData2.txt')
 data3 = readFile('testData3.txt')
@@ -218,7 +210,7 @@ print (len(data4))
 print(len(data5))
 data = [data1, data2, data3, data4, data5]
 writeToFile('data1Write.csv', data)
-
+"""
 
 """
 guild_info = open('guild_info.txt', 'r')
