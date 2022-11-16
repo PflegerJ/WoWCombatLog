@@ -56,10 +56,10 @@ stat_info_query = """query statInfo ($reportCode: String!, $start: Float!, $end:
 	}
 }
 """
-downlaod_logs = True
+downlaod_logs = False
 normalize_logs = True
 page_start = 1
-page_count = 6
+page_count = 10
 auth_token = warcraftLogAPI.get_new_token()
 
 page_curr = page_start
@@ -146,6 +146,9 @@ if normalize_logs:
     print("done normalizing")
 b =2
 # PCA
+
+
+
 
 pca.pca(normalize_file)
 # plot

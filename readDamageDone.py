@@ -162,29 +162,29 @@ def damageSummary(log, totalTime):
 
 
     spells = log['data']['reportData']['report']['table']['data']['entries']
-    data = [totalTime]
     vt = []
-
+    swp = []
 
     for spell in spells:
         spell_guid = spell['guid']
         spell_name = spell['name']
 
         if spell['guid'] == 48160 or spell['guid'] == 48159:          # VT
-            vt = DoT(spell, totalTime)
+            vt.append(spell['total'])
+            vt.append(spell['uptime'] / totalTime)
+            vt.append(spell['uses'])
+            #vt = DoT(spell, totalTime)
         #elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
             #dp = DoT(spell, totalTime)
         #elif spell['guid'] == 48125:        # SWP
+            swp.append(spell['total'])
+            swp.append(spell['uptime'] / totalTime)
+            swp.append(spell['uses'])
             #swp = DoT(spell, totalTime, swp = True)
-
-
-
-    total_damage = vt[0]# + dp[0] + swp[0]
-    data.append(total_damage)
 
     data.extend(vt)
     #data.extend(dp)
-    #data.extend(swp)
+    data.extend(swp)
     """
     line_data.extend(swp)
     

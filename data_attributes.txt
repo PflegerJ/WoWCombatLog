@@ -1,51 +1,46 @@
-parse Rank
-dps
-time
-0
-0
-0
-                'tick_ratio': 0,    # amount of ticks / uses
-                'miss_ratio': 0,    # misses / uses
-                'crit_ratio': 0,    # crits / uses
+Total DPS
+Fight Duration
+VT damage
+VT uptime    # time on boss / encounter duration
+VT uses
+SWP damage
+SWP uptime
+SWP uses
 
-                # tricks of the Trade only
-                'Hit Ratio': 0,
-                'Hit Min': 0,
-                'Hit Max': 0,
-                'Hit Total': 0,
 
-                'Resisted Hit Ratio': 0,
-                'Resisted Hit Min': 0,
-                'Resisted Hit Max': 0,
-                'Resisted Hit Total': 0,
-
-                'Critical Hit Ratio': 0,
-                'Critical Hit Min': 0,
-                'Critical Hit Max': 0,
-                'Critical Hit Total': 0,
-
-                'Resisted Critical Hit Ratio': 0,
-                'Resisted Critical Hit Min': 0,
-                'Resisted Critical Hit Max': 0,
-                'Resisted Critical Hit Total': 0,
-
-                # normal dot dmg
-                'Resisted Tick Ratio': 0,         # resisted ticks / total ticks
-                'Resisted Tick Min': 0, 
-                'Resisted Tick Max': 0,
-                'Resisted Tick Total': 0,
-
-                'Tick Ratio': 0,                  # normal ticks / total ticks
-                'Tick Min': 0,
-                'Tick Max': 0,        
-                'Tick Total': 0,    
-
-                'Resisted Critical Tick Ratio': 0,        # resisted crit ticks / total ticks
-                'Resisted Critical Tick Min': 0,
-                'Resisted Critical Tick Max': 0,
-                'Resisted Critical Tick Total': 0,
-
-                'Critical Tick Ratio': 0,                 # crit ticks / total ticks
-                'Critical Tick Min': 0,
-                'Critical Tick Max': 0,
-                'Critical Tick Total': 0
+####
+VT tick_ratio    # amount of ticks / uses
+VT miss_ratio    # misses / uses
+VT crit_ratio   # crits / uses
+VT tricks Hit Ratio
+VT tricksHit Min
+VT tricksHit Max
+VT tricksHit Total
+VT Resisted Hit Ratio
+VT Resisted Hit Min
+VT Resisted Hit Max
+VT Resisted Hit Total
+VT Critical Hit Ratio
+VT Critical Hit Min
+VT Critical Hit Max
+VT Critical Hit Total
+VT Resisted Critical Hit Ratio
+VT Resisted Critical Hit Min
+VT Resisted Critical Hit Max
+VT Resisted Critical Hit Total
+VT Resisted Tick Ratio
+VT Resisted Tick Min 
+VT Resisted Tick Max
+VT Resisted Tick Total
+VT Tick Ratio 
+VT Tick Min
+VT Tick Max        
+VT Tick Total   
+VT Resisted Critical Tick Ratio
+VT Resisted Critical Tick Min
+VT Resisted Critical Tick Max
+VT Resisted Critical Tick Total
+VT Critical Tick Ratio
+VT Critical Tick Min
+VT Critical Tick Max
+VT Critical Tick Total

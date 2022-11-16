@@ -11,14 +11,18 @@ def normalize_point(dataPoint, min, max, new_min = 0, new_max = 1):
 
 def normalize_data(data, row_size, col_size):
     nan_count = 0
+    line_count = 1
     for i in range(col_size):
         min1 = min(data[:, i])
         max1 = max(data[:, i])
-        if (min1 == max1):
-            print(i)
+        if (min1 == max1): 
+            print("removing line: ")
+            print(line_count)
             nan_count += 1
         for j in range(row_size):
             data[j, i] = normalize_point(data[j, i], min1, max1)
+        
+        line_count += 1
     
     data = data[~np.isnan(data)]
     data = np.reshape(data, (row_size, col_size - nan_count))
@@ -38,12 +42,14 @@ def normalize(file_in_name, file_out_name):
     csvreader = csv.reader(file_in)
     data = []
     data_entities = 0
+
     for line in csvreader:
         if line != []:
             data_points = len(line)
             data_entities += 1
             data.extend(line)
     
+    print("Data points before norm: ", data_points)
     np_data = np.array(data, dtype=float)
     np_data = np.reshape(np_data, (data_entities, data_points))
     parse_rank = np_data[:,0:1]
