@@ -159,12 +159,19 @@ def writeToFile(fileName, data):
 
 def damageSummary(log, totalTime):
     data = []
-
+    validLog = True
 
     spells = log['data']['reportData']['report']['table']['data']['entries']
     vt = []
     swp = []
-
+    dp = []
+    idp = []
+    mb = []
+    mf = []
+    swd = []
+    sf = []
+    sb = [0, 0]
+    sapper = 0
     for spell in spells:
         spell_guid = spell['guid']
         spell_name = spell['name']
@@ -173,28 +180,67 @@ def damageSummary(log, totalTime):
             vt.append(spell['total'])
             vt.append(spell['uptime'] / totalTime)
             vt.append(spell['uses'])
+            vt.append(spell['tickCount'])
             #vt = DoT(spell, totalTime)
-        #elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
+        elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
+            dp.append(spell['total'])
+            dp.append(spell['uptime'] / totalTime)
+            dp.append(spell['uses'])
+            dp.append(spell['tickCount'])
             #dp = DoT(spell, totalTime)
-        #elif spell['guid'] == 48125:        # SWP
+        elif spell['guid'] == 48125:        # SWP
             swp.append(spell['total'])
             swp.append(spell['uptime'] / totalTime)
             swp.append(spell['uses'])
+            swp.append(spell['tickCount'])
             #swp = DoT(spell, totalTime, swp = True)
+        elif spell['guid'] == 63675:        # improved DP
+            idp.append(spell['total'])
+            idp.append(spell['hitCount'])
+        elif spell['guid'] == 48127:    #mb
+            mb.append(spell['total'])
+            mb.append(spell['uses'])
+        elif spell['guid'] == 58381:    # mf
+            mf.append(spell['total'])
+            mf.append(spell.get('uses', -1))
+            mf.append(spell['hitCount'])
+        elif spell['guid'] == 34433:    # shadow fiend
+            sf.append(spell['total'])
+            sf.append(spell['hitCount'])
+        elif spell['guid'] == 48158:    # swd
+            swd.append(spell['total'])
+            swd.append(spell['uses'])
+        elif spell['guid'] == 56350:    # sar bomb
+            sb[0] = spell['total']
+            sb[1] = spell['uses']
+        elif spell['guid'] == 56488:    #sapper
+            sapper = spell['total']
 
     data.extend(vt)
-    #data.extend(dp)
+  #  print('vt: ', vt)
     data.extend(swp)
-    """
-    line_data.extend(swp)
-    
-    line_data.extend(swd)
-    line_data.extend(mb)
-    line_data.extend(sf)
-    line_data.extend(mf)
-    """ 
+  #  print('swp: ', swp)
+    data.extend(dp)
+   # print('dp: ', dp)
+    data.extend(idp)
+    #print('idp: ', idp)
+    data.extend(mb)
+    #print('mb: ', mb)
+    data.extend(mf)
+    #print('mf: ', mf)
+    data.extend(swd)
+    #print('swd: ', swd)
+    data.extend(mf)
+    #print('mf: ', mf)
+    data.extend(sb)
+    #print('sb: ', sb)
+    data.append(sapper)
+    #print('sapper: ', sapper)
+    #print(data)
+    if validLog:
+        validLog = len(data) == 27
 
-    return data
+    return data, validLog
 
 """
 data1 = readFile('testData1.txt')

@@ -1,11 +1,33 @@
-Total DPS
-Fight Duration
 VT damage
 VT uptime    # time on boss / encounter duration
 VT uses
+VT tickCount
 SWP damage
 SWP uptime
 SWP uses
+SWP tickCount
+DP damage
+DP uptime
+DP uses
+DP tickCount
+IDP damage
+IDP hitCount
+MB damage
+MB uses
+MF damage
+MF uses
+MF hitCount
+SWD damage
+SWD uses
+SF damage
+SF hitCount
+Saronite Bomb damage
+Saronite Bomb uses
+Sapper Damage
+
+
+Total DPS
+Fight Duration
 
 
 ####

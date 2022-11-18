@@ -37,13 +37,17 @@ def pca(fileName):
     #print(parse_rank)
     print(data[0])
     data_without_parse = data[:,:-1]
-    data = center(data_without_parse)
-    data_cov = np.cov(data_without_parse.T)
+    data_without_time_dmg = data[:, 2:]
+    #data = center(data_without_parse)
+    data = center(data_without_time_dmg)
+    #data_cov = np.cov(data_without_parse.T)
+    data_cov = np.cov(data_without_time_dmg.T)
     eigenValues, eigenVector = la.eig(data_cov)
     eigenValuesNP, eigenVectorsNP = linalg.eig(data_cov)
     eigen_np = np.array(eigenValues, dtype=float)
 
     idx = eigenValuesNP.argsort()[::-1] 
+    print(idx)
     eigenValuesNP = eigenValuesNP[idx]
     eigenVectorsNP = eigenVectorsNP[:,idx]
 

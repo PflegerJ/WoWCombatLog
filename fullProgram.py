@@ -57,18 +57,22 @@ stat_info_query = """query statInfo ($reportCode: String!, $start: Float!, $end:
 }
 """
 downlaod_logs = False
-normalize_logs = True
+normalize_logs = False
 page_start = 1
-page_count = 10
+page_count = 2
 auth_token = warcraftLogAPI.get_new_token()
 
 page_curr = page_start
 if downlaod_logs:
     # Get list of all reports for patchwork 
+   
     full_parse_data_list = []
     full_boss_list_vars['pageNumber'] = page_start
     for page_curr in range(page_start, page_count):
         print(page_curr)
+        log_on_page = 1
+        
+
         full_boss_list_vars['pageNumber'] = page_curr
         boss_log_list_api = warcraftLogAPI.apiCall(full_boss_list_query, full_boss_list_vars, auth_token)
         boss_log_list = boss_log_list_api['data']['worldData']['encounter']['characterRankings']
@@ -77,6 +81,7 @@ if downlaod_logs:
 
         oldParseRank = 100
         for log in boss_log_list['rankings']:
+            #print(log_on_page)
             parse_data = []
             #print(test_cur)
 
@@ -124,13 +129,15 @@ if downlaod_logs:
                 # get damage info
                 damage_summary = warcraftLogAPI.apiCall(damage_summary_query, damage_summary_vars, auth_token)
                 #print(damage_summary)
-                damage_summary_data = readDamageDone.damageSummary(damage_summary, log['duration'])
+                damage_summary_data, validLog = readDamageDone.damageSummary(damage_summary, log['duration'])
 
                 parse_data.extend(damage_summary_data)
                 # store info 
-            
-                full_parse_data_list.append(parse_data)
+               # print(validLog)
+                if validLog:
+                    full_parse_data_list.append(parse_data)
 
+                log_on_page += 1
             oldParseRank = parseRank
 
         #write to file
