@@ -177,50 +177,49 @@ def damageSummary(log, totalTime):
         spell_name = spell['name']
 
         if spell['guid'] == 48160 or spell['guid'] == 48159:          # VT
-            vt.append(spell['total'])
-            vt.append(spell['uptime'] / totalTime)
-            vt.append(spell['uses'])
-            vt.append(spell['tickCount'])
+            vt.append(spell.get('total', -1))
+            vt.append(spell.get('uptime', -1) / totalTime)
+            vt.append(spell.get('uses', -1))
+            vt.append(spell.get('tickCount', -1))
             #vt = DoT(spell, totalTime)
         elif spell['guid'] == 48300 or spell['guid'] == 48299:        # DP
-            dp.append(spell['total'])
-            dp.append(spell['uptime'] / totalTime)
-            dp.append(spell['uses'])
-            dp.append(spell['tickCount'])
+            dp.append(spell.get('total', -1))
+            dp.append(spell.get('uptime', -1) / totalTime)
+            dp.append(spell.get('uses', -1))
+            dp.append(spell.get('tickCount', -1))
             #dp = DoT(spell, totalTime)
         elif spell['guid'] == 48125:        # SWP
-            swp.append(spell['total'])
-            swp.append(spell['uptime'] / totalTime)
-            swp.append(spell['uses'])
-            swp.append(spell['tickCount'])
+            swp.append(spell.get('total', -1))
+            swp.append(spell.get('uptime', -1) / totalTime)
+            swp.append(spell.get('uses', -1))
+            swp.append(spell.get('tickCount', -1))
             #swp = DoT(spell, totalTime, swp = True)
         elif spell['guid'] == 63675:        # improved DP
-            idp.append(spell['total'])
-            idp.append(spell['hitCount'])
+            idp.append(spell.get('total', -1))
+            idp.append(spell.get('hitCount', -1))
         elif spell['guid'] == 48127:    #mb
-            mb.append(spell['total'])
-            mb.append(spell['uses'])
+            mb.append(spell.get('total', -1))
+            mb.append(spell.get('uses', -1))
         elif spell['guid'] == 58381:    # mf
-            mf.append(spell['total'])
+            mf.append(spell.get('total', -1))
             mf.append(spell.get('uses', -1))
-            mf.append(spell['hitCount'])
+            mf.append(spell.get('hitCount', -1))
         elif spell['guid'] == 34433:    # shadow fiend
-            sf.append(spell['total'])
-            sf.append(spell['hitCount'])
+            sf.append(spell.get('total', -1))
+            sf.append(spell.get('hitCount', -1))
         elif spell['guid'] == 48158:    # swd
-            swd.append(spell['total'])
-            swd.append(spell['uses'])
+            swd.append(spell.get('total', -1))
+            swd.append(spell.get('uses', -1))
         elif spell['guid'] == 56350:    # sar bomb
             sb[0] = spell['total']
             sb[1] = spell['uses']
         elif spell['guid'] == 56488:    #sapper
             sapper = spell['total']
 
-    data.extend(vt)
+   
   #  print('vt: ', vt)
-    data.extend(swp)
   #  print('swp: ', swp)
-    data.extend(dp)
+    
    # print('dp: ', dp)
     data.extend(idp)
     #print('idp: ', idp)
@@ -237,8 +236,14 @@ def damageSummary(log, totalTime):
     data.append(sapper)
     #print('sapper: ', sapper)
     #print(data)
+    data.extend(vt)
+    data.extend(swp)
+    data.extend(dp)
     if validLog:
         validLog = len(data) == 27
+    for attribute in data:
+        if attribute < 0:
+            validLog = False
 
     return data, validLog
 

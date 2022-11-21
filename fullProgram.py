@@ -113,8 +113,8 @@ if downlaod_logs:
                 if parseRank == -1:
                     parseRank = oldParseRank
                 parse_data.append(parseRank)
-                parse_data.append(total_dps)
-                parse_data.append(log['duration'])
+                #parse_data.append(total_dps)
+                #parse_data.append(log['duration'])
                 #figure out time
                 start_time = log['startTime'] - log['report']['startTime']
                 end_time = start_time + log['duration']
@@ -142,12 +142,12 @@ if downlaod_logs:
 
         #write to file
     print("writing dmg to file")
-    readDamageDone.writeToFile('damageDone.csv', full_parse_data_list)
+    readDamageDone.writeToFile('damageDoneTest1.csv', full_parse_data_list)
     print("done")
    
-raw_data_file = 'damageDone.csv'
+raw_data_file = 'damageDoneTest1.csv'
 # normalize
-normalize_file = "normTest.csv"
+normalize_file = "normTest2.csv"
 if normalize_logs:
     normalize.normalize(raw_data_file, normalize_file)
     print("done normalizing")

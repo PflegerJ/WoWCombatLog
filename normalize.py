@@ -1,6 +1,7 @@
 
 import numpy as np
 import csv
+from mlxtend.preprocessing import standardize
 
 def normalize_point(dataPoint, min, max, new_min = 0, new_max = 1):
     top = dataPoint - min
@@ -30,6 +31,14 @@ def normalize_data(data, row_size, col_size):
     return data
 
 
+def standardize_data(data):
+    data = standardize(data)
+
+    b = 2
+    return data
+
+
+
 def writeToFile(fileName, data):
     file = open(fileName, 'w')
     wr = csv.writer(file)
@@ -37,6 +46,7 @@ def writeToFile(fileName, data):
 
     file.close()
     return
+
 
 def normalize(file_in_name, file_out_name):
     file_in = open(file_in_name)
@@ -54,7 +64,8 @@ def normalize(file_in_name, file_out_name):
     np_data = np.array(data, dtype=float)
     np_data = np.reshape(np_data, (data_entities, data_points))
     parse_rank = np_data[:,0:1]
-    normalized_data = normalize_data(np_data[:,1:], data_entities, data_points - 1)
+    normalized_data = standardize_data(np_data[:,1:])
+    #normalized_data = normalize_data(np_data[:,1:], data_entities, data_points - 1)
     combined = np.append(normalized_data, parse_rank, axis=1)
     writeToFile(file_out_name, combined)
     return
